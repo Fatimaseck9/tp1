@@ -1,0 +1,37 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+
+      - name: Build avec Maven
+        run: mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install
+
+      - name: Analyse SonarQube
+        run: mvn sonar:sonar
+
+  deploy:
+    needs: build
+    runs-on: windows-latest
+
+    steps:
+      - name: Approbation du déploiement
+        run: |
+          echo "Do you want to proceed for deployment?"
+          # Vous pouvez ajouter des étapes spécifiques de déploiement ici
+
+
