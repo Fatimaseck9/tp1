@@ -3,9 +3,7 @@ pipeline {
     tools {
         maven 'Maven'
     }
- environment{
-        SONAR_URL="http://URL_SONAR:9000"
-    }
+ 
 
     stages {
         stage("Source") {
@@ -26,7 +24,7 @@ pipeline {
 
         stage("SonarQube Analysis") {
             steps {
-                bat'mvn sonar:sonar -Dsonar.host.url=$SONAR_URL'
+                bat'mvn sonar:sonar'
 
         
 
