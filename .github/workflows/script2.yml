@@ -22,7 +22,7 @@ jobs:
         with:
 
           java-version: '17'
-            distribution:'temuri'
+          distribution: 'temurin'
 
 
       - name: Build avec Maven
