@@ -23,7 +23,7 @@ jobs:
 
           java-version: '17'
           distribution: 'temurin'
-
+          cache: maven
 
       - name: Build avec Maven
         run: mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install
