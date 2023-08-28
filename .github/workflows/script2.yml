@@ -29,7 +29,10 @@ jobs:
         run: mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install
 
       - name: Analyse SonarQube
-        run: mvn sonar:sonar
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          run: mvn sonar:sonar -Dsonar.login=$SONAR_TOKEN -Dsonar.projectKey=your_project_key -Dsonar.host.url=https://localhost:9000
+
 
   deploy:
     needs: build
