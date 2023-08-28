@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest  # Exécute sur Windows
+    runs-on: windows-latest
 
     steps:
       - name: Checkout du code
@@ -17,6 +17,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '17'
+          distribution: 'temurin'
 
       - name: Build avec Maven
         run: mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install
@@ -24,7 +25,7 @@ jobs:
       - name: Analyse SonarQube
         env:
           SONAR_TOKEN: ${{ secrets.tokenwork}}
-          run: mvn sonar:sonar -Dsonar.login=$tokenwork
+        run: mvn sonar:sonar -Dsonar.login=$SONAR_TOKEN
 
 
   deploy:
@@ -35,6 +36,3 @@ jobs:
       - name: Approbation du déploiement
         run: |
           echo "Do you want to proceed for deployment?"
-          # Vous pouvez ajouter des étapes spécifiques de déploiement ici
-
- 
